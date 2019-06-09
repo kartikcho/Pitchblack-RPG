@@ -3,7 +3,7 @@ An interactive text adventure with a DnD style gameplay involving multiple stats
 
 ## Requirements
 
-*Python3 
+* Python3 
 
 ### Contributing
 
