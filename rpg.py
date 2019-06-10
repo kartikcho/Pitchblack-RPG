@@ -11,7 +11,7 @@ import sys
 import re
 
 #randomly generates player and enemy stats
-class GameSettings:
+class Settings:
     PLAYER_ATTACK = random.randint(5, 10)
     MAX_ENEMY_STRENGTH = 15
     MIN_ENEMY_STRENGTH = 5
@@ -37,19 +37,19 @@ class Player:
     else:
         print("You did not choose a weapon, restarting game...")
 
-    attack = GameSettings.PLAYER_ATTACK + weapon_bonus
+    attack = Settings.PLAYER_ATTACK + weapon_bonus
     health = 100
     gold = 0
 
 #randomly generates enemy type
 class Enemy:
     name = (
-        random.choice(GameSettings.ENEMY_PREFIX)
+        random.choice(Settings.ENEMY_PREFIX)
         + " "
-        + random.choice(GameSettings.ENEMIES)
+        + random.choice(Settings.ENEMIES)
     )
-    weapon = random.choice(GameSettings.ENEMY_WEAPON)
-    attack = random.randint(GameSettings.MIN_ENEMY_STRENGTH, GameSettings.MAX_ENEMY_STRENGTH)
+    weapon = random.choice(Settings.ENEMY_WEAPON)
+    attack = random.randint(Settings.MIN_ENEMY_STRENGTH, Settings.MAX_ENEMY_STRENGTH)
     health = random.randint(10, 40) 
 
 
@@ -124,11 +124,11 @@ def difficulty():
     Player.attack = Player.attack + random.randint(1, 3) * instance.score
     Player.health = Player.health + random.randint(1, 3) * instance.score
     Enemy.name = (
-        random.choice(GameSettings.ENEMY_PREFIX)
+        random.choice(Settings.ENEMY_PREFIX)
         + " "
-        + random.choice(GameSettings.ENEMIES)
+        + random.choice(Settings.ENEMIES)
     )
-    Enemy.weapon = random.choice(GameSettings.ENEMY_WEAPON)
+    Enemy.weapon = random.choice(Settings.ENEMY_WEAPON)
     Enemy.attack = Enemy.attack + random.randint(1, 3) * instance.score
     Enemy.health = random.randint(1, 20) + random.randint(1, 3) * instance.score
     Player.gold = Player.gold + random.randint(5,15) * instance.score
@@ -139,8 +139,8 @@ def victory():
     difficulty()
     say(f"You find some gold while looting and now have {Player.gold}")
     say(f"Your attack goes up to {Player.attack} and your health to {Player.health}")
-    if GameSettings.PLAYER_HEAL > 0:
-        say(f"You have {GameSettings.PLAYER_HEAL} meds left. Use them wisely.")
+    if Settings.PLAYER_HEAL > 0:
+        say(f"You have {Settings.PLAYER_HEAL} meds left. Use them wisely.")
         say("Would you like to use one? Y/N")
 
     value = re.compile(r'[y,Y,n,N]+')
@@ -151,12 +151,12 @@ def victory():
         choice = input()
         if choice == 'Y' or choice == 'y':
             Player.health = Player.health + (random.randint(5, 10) * instance.score)
-            GameSettings.PLAYER_HEAL = GameSettings.PLAYER_HEAL - 1
-            say(f"Your health goes up to {Player.health}. You have {GameSettings.PLAYER_HEAL} meds left.")
+            Settings.PLAYER_HEAL = Settings.PLAYER_HEAL - 1
+            say(f"Your health goes up to {Player.health}. You have {Settings.PLAYER_HEAL} meds left.")
         else:
-            say(f"You still have {GameSettings.PLAYER_HEAL} meds left.")
+            say(f"You still have {Settings.PLAYER_HEAL} meds left.")
             
-    if GameSettings.PLAYER_HEAL == 0:
+    if Settings.PLAYER_HEAL == 0:
         say("You are out of meds. Good luck.")
     store()    
     say("Go deeper into the cave? Y/N")
@@ -207,7 +207,7 @@ def store():
         instance()
         
     elif store.choice == '4':
-        GameSettings.PLAYER_HEAL = GameSettings.PLAYER_HEAL + 1
+        Settings.PLAYER_HEAL = Settings.PLAYER_HEAL + 1
         instance()
              
         
