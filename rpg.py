@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jun 6 11:42:48 2019
+
+@author: Kartik
+"""
+
 import random
 import time
 import sys
@@ -6,11 +13,11 @@ class GameSettings:
     PLAYER_ATTACK = random.randint(5, 10)
     MAX_ENEMY_STRENGTH = 15
     MIN_ENEMY_STRENGTH = 5
-    ENEMIES = ['troll', 'goblin', 'orc', 'dragon', 'mutant', 'zombie', 'vampire', 'werewolf']
-    ENEMY_PREFIX = ['big', 'giant', 'ugly', 'rotton', 'angry', 'vicious', 'murderous', 'vile']
-    ENEMY_WEAPON = ['sword', 'axe', 'hammer', 'club', 'giant bone', 'mace', 'dagger', 'terrible case of body odor']
-    PLAYER_WEAPON = {"sword": 2, "axe": 3, "dagger": 1}
-    PLAYER_HEAL = 10
+    ENEMIES = ['behemoth', 'goblin', 'hellstep', 'orc', 'golem', 'zombie', 'undead mermaid','brinebrute', 'soulcreep','murkmutant']
+    ENEMY_PREFIX = ['big', 'giant', 'ugly', 'fat', 'angry', 'vicious', 'murderous', 'vile', 'fat', 'dyslexic', 'terribly anorexic']
+    ENEMY_WEAPON = ['sword', 'warhammer', 'charming smile', 'axe', 'hammer', 'club', 'giant bone', 'mace', 'dagger', 'terrible case of body odor', ' shiny gauntlet from a dead city soldier']
+    PLAYER_WEAPON = {"sword": 2, "axe": 3, "bow": 2}
+    PLAYER_HEAL = 5
     
 class Player:
     name = input('What is your name traveller? ')
@@ -101,7 +108,7 @@ def victory():
     say(f"Your attack goes up to {Player.attack} and your health to {Player.health}")
     if GameSettings.PLAYER_HEAL > 0:
         say(f"You have {GameSettings.PLAYER_HEAL} meds left. Use them wisely.")
-        say("Would you like to use one? [Y]es or [N]o")
+        say("Would you like to use one? Y/N")
         choice = input()
         if choice == 'Y' or choice == 'y':
             Player.health = Player.health + (random.randint(1, 3) * instance.score)
@@ -111,7 +118,7 @@ def victory():
             say(f"You still have {GameSettings.PLAYER_HEAL} meds left.")
     if GameSettings.PLAYER_HEAL == 0:
         say("You are out of meds. Good luck.")
-    say("Go deeper into the cave? y/n")
+    say("Go deeper into the cave? Y/N")
     choice = input()
     if choice == 'Y' or  choice == 'y':
         say('You march forward...')
