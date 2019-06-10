@@ -15,44 +15,9 @@ class GameSettings:
     PLAYER_ATTACK = random.randint(5, 10)
     MAX_ENEMY_STRENGTH = 15
     MIN_ENEMY_STRENGTH = 5
-    ENEMIES = [
-        "behemoth",
-        "goblin",
-        "hellstep",
-        "orc",
-        "golem",
-        "zombie",
-        "undead mermaid",
-        "brinebrute",
-        "soulcreep",
-        "murkmutant",
-    ]
-    ENEMY_PREFIX = [
-        "big",
-        "giant",
-        "ugly",
-        "fat",
-        "angry",
-        "vicious",
-        "murderous",
-        "vile",
-        "fat",
-        "dyslexic",
-        "terribly anorexic",
-    ]
-    ENEMY_WEAPON = [
-        "sword",
-        "warhammer",
-        "charming smile",
-        "axe",
-        "hammer",
-        "club",
-        "giant bone",
-        "mace",
-        "dagger",
-        "terrible case of body odor",
-        " shiny gauntlet from a dead city soldier",
-    ]
+    ENEMIES = ['behemoth', 'goblin', 'hellstep', 'orc', 'golem', 'zombie', 'undead mermaid','brinebrute', 'soulcreep','murkmutant']
+    ENEMY_PREFIX = ['big', 'giant', 'ugly', 'fat', 'angry', 'vicious', 'murderous', 'vile', 'fat', 'dyslexic', 'terribly anorexic']
+    ENEMY_WEAPON = ['sword', 'warhammer', 'charming smile', 'axe', 'hammer', 'club', 'giant bone', 'mace', 'dagger', 'terrible case of body odor', 'shiny gauntlet from a dead city soldier']
     PLAYER_WEAPON = {"sword": 2, "axe": 3, "bow": 2}
     PLAYER_HEAL = 5
 
@@ -73,7 +38,8 @@ class Player:
         print("You did not choose a weapon, restarting game...")
 
     attack = GameSettings.PLAYER_ATTACK + weapon_bonus
-    health = 15
+    health = 100
+    gold = 0
 
 
 class Enemy:
@@ -83,10 +49,9 @@ class Enemy:
         + random.choice(GameSettings.ENEMIES)
     )
     weapon = random.choice(GameSettings.ENEMY_WEAPON)
-    attack = random.randint(
-        GameSettings.MIN_ENEMY_STRENGTH, GameSettings.MAX_ENEMY_STRENGTH
-    )
-    health = random.randint(1, 20)
+    attack = random.randint(GameSettings.MIN_ENEMY_STRENGTH, GameSettings.MAX_ENEMY_STRENGTH)
+    health = random.randint(10, 40) 
+
 
 
 playAgain = "Y"
@@ -131,9 +96,7 @@ def instance():
         battle()
     elif choice == '2':
         end()
- 
         
-
 
 def battle():
     while Enemy.health > 0:
@@ -169,11 +132,13 @@ def difficulty():
     Enemy.weapon = random.choice(GameSettings.ENEMY_WEAPON)
     Enemy.attack = Enemy.attack + random.randint(1, 3) * instance.score
     Enemy.health = random.randint(1, 20) + random.randint(1, 3) * instance.score
+    Player.gold = Player.gold + random.randint(5,15) * instance.score
 
 
 def victory():
     say(f"You defeated the {Enemy.name}.")
     difficulty()
+    say(f"You find some gold while looting and now have {Player.gold}")
     say(f"Your attack goes up to {Player.attack} and your health to {Player.health}")
     if GameSettings.PLAYER_HEAL > 0:
         say(f"You have {GameSettings.PLAYER_HEAL} meds left. Use them wisely.")
@@ -185,14 +150,16 @@ def victory():
     while not value.match(choice):
         print ("Please enter a valid character")
         choice = input()
-    if choice == 'Y' or choice == 'y':
-        Player.health = Player.health + (random.randint(1, 3) * instance.score)
-        GameSettings.PLAYER_HEAL = GameSettings.PLAYER_HEAL - 1
-        say(f"Your health goes up to {Player.health}. You have {GameSettings.PLAYER_HEAL} meds left.")
-    else:
-        say(f"You still have {GameSettings.PLAYER_HEAL} meds left.")
+        if choice == 'Y' or choice == 'y':
+            Player.health = Player.health + (random.randint(5, 10) * instance.score)
+            GameSettings.PLAYER_HEAL = GameSettings.PLAYER_HEAL - 1
+            say(f"Your health goes up to {Player.health}. You have {GameSettings.PLAYER_HEAL} meds left.")
+        else:
+            say(f"You still have {GameSettings.PLAYER_HEAL} meds left.")
+            
     if GameSettings.PLAYER_HEAL == 0:
         say("You are out of meds. Good luck.")
+    store()    
     say("Go deeper into the cave? Y/N")
     value = re.compile(r'[y,Y,n,N]+')
     choice = input()
@@ -210,13 +177,44 @@ def end():
     say("You decide to be smart and retreat...")
     say(f"You defeated {instance.score} monsters.")
     say(f"Thank you for playing.")
-    sys.exit("Exit game")
 
 
-while playAgain == "Y" or playAgain == "y":
+def store():
+    say(f"You see a strange merchant waiting in the shadows with blue flames in his lamp")
+    say(f"\n'What are you buying stranger?'\n")
+    say(f"You have {Player.gold} coins left.")
+    print ("1. Flame Sword       [5 DMG]     --> 100 gold coins")
+    print ("2. Enchanted Dagger  [5 DMG]     --> 40 gold coins")
+    print ("3. Stealth Bow       [5 DMG]     --> 70 gold coins")
+    print ("4. Meds              [1 MED]     --> 20 gold coins")
+    print ("5. back")
+    print (" ")
+    
+    store.choice = input()
+    
+    if store.choice == '1':
+        Player.weapon_bonus = 6
+        instance()
+        
+    elif store.choice == '2':
+        Player.weapon_bonus = 4
+        instance()
+        
+    elif store.choice == '3':
+        Player.weapon_bonus = 5
+        instance()
+        
+    elif store.choice == '4':
+        GameSettings.PLAYER_HEAL = GameSettings.PLAYER_HEAL + 1
+        instance()
+             
+
+sys.exit("Exit game")
+        
+while playAgain == 'Y' or playAgain == 'y':
     intro()
     instance.score = 0
+    Player.gold = 0
     instance()
     end()
     break
-
