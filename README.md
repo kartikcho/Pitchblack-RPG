@@ -13,5 +13,6 @@ Also involves multiple stats for the player like HP, AP and itembonuses.
 
 * Check the issues tab to work on fixes
 * For content updates, work on a seperate branch
+* If you find a bug while reviewing the code, please report the issue with suitable labels.
 
 ### Create pull requests so I can review and add to master.
