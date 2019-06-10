@@ -4,13 +4,13 @@ Created on Thu Jun 6 11:42:48 2019
 
 @author: Kartik
 """
-
+#importing libraries
 import random
 import time
 import sys
 import re
 
-
+#randomly generates player and enemy stats
 class GameSettings:
     PLAYER_ATTACK = random.randint(5, 10)
     MAX_ENEMY_STRENGTH = 15
@@ -21,7 +21,7 @@ class GameSettings:
     PLAYER_WEAPON = {"sword": 2, "axe": 3, "bow": 2}
     PLAYER_HEAL = 5
 
-
+#uses player input to create a character
 class Player:
     name = input("What is your name traveller? ")
     weapon_choice = input("Choose your weapon: 1. Sword, 2.Battle Axe, 3. Recurve Bow ")
@@ -41,7 +41,7 @@ class Player:
     health = 100
     gold = 0
 
-
+#randomly generates enemy type
 class Enemy:
     name = (
         random.choice(GameSettings.ENEMY_PREFIX)
@@ -53,17 +53,17 @@ class Enemy:
     health = random.randint(10, 40) 
 
 
-playAgain = "Y"
+playAgain = "Y"      #to run the first instance
 
-
+#text output speed
 def say(text):
     for char in text:
         print(char, end="")
         time.sleep(0.04)
     print("")
-    time.sleep(0.4)
+    time.sleep(0.3)
 
-
+#uses all the stats to start story
 def intro():
     say(f"Greetings, {Player.name}.")
     if Player.weapon == "sword":
@@ -75,7 +75,7 @@ def intro():
     say("You were sent to clear out the Pitchblack cave by the kingdom.")
     say("You reach your destination, the cave dark as the night as you enter.")
 
-
+#procedurally generates a battle instance
 def instance():
     say(f"You have encountered a {Enemy.name} wielding a {Enemy.weapon}.")
     say(f"Its attack is {Enemy.attack} and it has {Enemy.health} health.")
@@ -96,7 +96,7 @@ def instance():
     elif choice == '2':
         end()
         
-
+#simulates the fight
 def battle():
     while Enemy.health > 0:
         say(f"You attack the {Enemy.name} with your {Player.weapon}.")
@@ -118,7 +118,7 @@ def battle():
         if Player.health <= 0:
             sys.exit("You died. Game Over.")
 
-
+#generates new enemy strength and stats to increase difficulty and levels up character after fight
 def difficulty():
     instance.score = instance.score + 1
     Player.attack = Player.attack + random.randint(1, 3) * instance.score
@@ -133,7 +133,7 @@ def difficulty():
     Enemy.health = random.randint(1, 20) + random.randint(1, 3) * instance.score
     Player.gold = Player.gold + random.randint(5,15) * instance.score
 
-
+#generates victory and the loot after battle
 def victory():
     say(f"You defeated the {Enemy.name}.")
     difficulty()
@@ -147,7 +147,7 @@ def victory():
     choice = input()
     
     while not value.match(choice):
-        print ("Please enter a valid character")
+        print ("Please enter a valid response")
         choice = input()
         if choice == 'Y' or choice == 'y':
             Player.health = Player.health + (random.randint(5, 10) * instance.score)
@@ -172,13 +172,15 @@ def victory():
         instance()
     if choice == "N" or choice == "n":
         end()
+        
+#end game if chosen to quit
 def end():
     say("You decide to be smart and retreat...")
     say(f"You defeated {instance.score} monsters.")
     say(f"Thank you for playing.")
-    sys.exit("Exit game")
+    sys.exit("Exiting game ...")
 
-
+#merchant uses Player.gold
 def store():
     say(f"You see a strange merchant waiting in the shadows with blue flames in his lamp")
     say(f"\n'What are you buying stranger?'\n")
@@ -208,7 +210,6 @@ def store():
         GameSettings.PLAYER_HEAL = GameSettings.PLAYER_HEAL + 1
         instance()
              
-
         
 while playAgain == 'Y' or playAgain == 'y':
     intro()
