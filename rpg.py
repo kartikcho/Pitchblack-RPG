@@ -74,6 +74,16 @@ def instance():
         battle()
     elif battle.choice == '2':
         end()
+    else:
+        print("Choose a valid option")
+    say(f"1. Attack, 2. Run")
+    battle.choice = input()
+    if battle.choice == '1':
+        battle()
+    elif battle.choice == '2':
+        end()
+        
+        
 
 def battle():
     while Enemy.health > 0:
@@ -110,23 +120,28 @@ def victory():
         say(f"You have {GameSettings.PLAYER_HEAL} meds left. Use them wisely.")
         say("Would you like to use one? Y/N")
         choice = input()
+        abc
         if choice == 'Y' or choice == 'y':
             Player.health = Player.health + (random.randint(1, 3) * instance.score)
             GameSettings.PLAYER_HEAL = GameSettings.PLAYER_HEAL - 1
             say(f"Your health goes up to {Player.health}. You have {GameSettings.PLAYER_HEAL} meds left.")
+        if choice != 'Y' or choice != 'y' or choice != 'N' or choice != 'n':
+            say('Choose a valid option Y/N')
         else:
             say(f"You still have {GameSettings.PLAYER_HEAL} meds left.")
     if GameSettings.PLAYER_HEAL == 0:
         say("You are out of meds. Good luck.")
     say("Go deeper into the cave? Y/N")
     choice = input()
+    
     if choice == 'Y' or  choice == 'y':
         say('You march forward...')
         instance()
     if choice == 'N' or  choice == 'n':
         end()
-    
-
+    if choice != 'Y' or choice != 'y' or choice != 'N' or choice != 'n':
+        say('Choose a valid option Y/N')
+        choice = input()
 def end():
     say("You decide to be smart and retreat...")
     say(f"You defeated {instance.score} monsters.")
