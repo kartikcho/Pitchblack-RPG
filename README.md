@@ -1,5 +1,9 @@
-# RPG-textadventure
-An interactive text adventure with a DnD style gameplay involving multiple stats like HP, AP and itembonuses.
+# This is Cave Pitchblack
+Sent by the king himself, you must clear out the dungeon bothering the townsfolk, or die trying...
+
+### DnD style gameplay
+An interactive text adventure with a dice rolling to determine enemy's stats.
+Also involves multiple stats for the player like HP, AP and itembonuses.
 
 ## Requirements
 
