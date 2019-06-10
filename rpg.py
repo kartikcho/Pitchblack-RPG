@@ -53,7 +53,6 @@ class Enemy:
     health = random.randint(10, 40) 
 
 
-
 playAgain = "Y"
 
 
@@ -90,7 +89,7 @@ def instance():
     choice = input()
     
     while not number.match(choice):
-        print ("Please enter a valid character")
+        print ("Please enter a valid response")
         choice = input()
     if choice == '1':
         battle()
@@ -165,7 +164,7 @@ def victory():
     choice = input()
     
     while not value.match(choice):
-        print ("Please enter a valid character")
+        print ("Please enter a valid response")
         choice = input()
     
     if choice == 'Y' or  choice == 'y':
@@ -177,6 +176,7 @@ def end():
     say("You decide to be smart and retreat...")
     say(f"You defeated {instance.score} monsters.")
     say(f"Thank you for playing.")
+    sys.exit("Exit game")
 
 
 def store():
@@ -209,7 +209,6 @@ def store():
         instance()
              
 
-sys.exit("Exit game")
         
 while playAgain == 'Y' or playAgain == 'y':
     intro()
