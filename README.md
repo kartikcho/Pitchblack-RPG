@@ -5,6 +5,9 @@ An interactive text adventure with a DnD style gameplay involving multiple stats
 
 * Python3 
 
-### Contributing
+## Contributing
 
-To contribute to the project, open a pull request so I can review and add to master.
+* Check the issues tab to work on fixes
+* For content updates, work on a seperate branch
+
+### Create pull requests so I can review and add to master.
