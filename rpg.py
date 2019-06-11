@@ -23,9 +23,16 @@ class Settings:
 
 #uses player input to create a character
 class Player:
-    name = input("What is your name traveller? ")
-    weapon_choice = input("Choose your weapon: 1. Sword, 2.Battle Axe, 3. Recurve Bow ")
-    if weapon_choice == "1":
+
+    name = input('What is your name traveller? ')
+    
+    number = re.compile(r'[1,2,3]+')                                                        #characters allowed
+    weapon_choice = input('Choose your weapon: 1. Sword, 2.Battle Axe, 3. Recurve Bow ')    #while loop that executes till the entered character entered is valid
+    
+    while not number.match(weapon_choice):                                                  #compares the character entered
+        print ("Please enter a valid response")                                             #executes if character entered is invalid
+        weapon_choice = input('Choose your weapon: 1. Sword, 2. Battle Axe, 3. Recurve Bow ')
+    if weapon_choice == '1':
         weapon_bonus = 2
         weapon = "sword"
     elif weapon_choice == "2":
@@ -85,10 +92,10 @@ def instance():
     say(f"You choose to:")
     say(f"1. Attack, 2. Run")
     
-    number = re.compile(r'[1,2]+')
-    choice = input()
+    number = re.compile(r'[1,2]+')                                                  #characters allowed
+    choice = input()                                                                #while loop that executes till the entered character entered is valid
     
-    while not number.match(choice):
+    while not number.match(choice):                                                 #compares the character entered
         print ("Please enter a valid response")
         choice = input()
     if choice == '1':
@@ -143,10 +150,9 @@ def victory():
         say(f"You have {Settings.PLAYER_HEAL} meds left. Use them wisely.")
         say("Would you like to use one? Y/N")
 
-    value = re.compile(r'[y,Y,n,N]+')
-    choice = input()
-    
-    while not value.match(choice):
+    value = re.compile(r'[y,Y,n,N]+')                                               #characters allowed
+    choice = input()                                                                                       
+    while not value.match(choice):                                                  #while loop that executes till the entered character entered is valid
         print ("Please enter a valid response")
         choice = input()
         if choice == 'Y' or choice == 'y':
