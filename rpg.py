@@ -60,7 +60,11 @@ class Enemy:
     health = random.randint(10, 40) 
 
 
-playAgain = "Y"      #to run the first instance
+f = open('asciiart2.txt', 'r')   #read file to display logo
+asciiart = f.read()
+playAgain = "Y"                  #to run the first instance
+
+
 
 #text output speed
 def say(text):
@@ -72,6 +76,9 @@ def say(text):
 
 #uses all the stats to start story
 def intro():
+    print (asciiart)            #display logo
+    print ()
+    print ()
     say(f"Greetings, {Player.name}.")
     if Player.weapon == "sword":
         say("You have a sword in your hand.")
