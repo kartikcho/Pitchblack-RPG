@@ -23,7 +23,10 @@ class Settings:
 
 #uses player input to create a character
 class Player:
-
+    f = open('asciiart2.txt', 'r') # open file in read mode
+    data = f.read()      # copy to a string
+    f.close()               # close the file
+    print (data)  
     name = input('What is your name traveller? ')
     
     number = re.compile(r'[1,2,3]+')                                                        #characters allowed
@@ -60,8 +63,7 @@ class Enemy:
     health = random.randint(10, 40) 
 
 
-f = open('asciiart2.txt', 'r')   #read file to display logo
-asciiart = f.read()
+
 playAgain = "Y"                  #to run the first instance
 
 
@@ -76,9 +78,6 @@ def say(text):
 
 #uses all the stats to start story
 def intro():
-    print (asciiart)            #display logo
-    print ()
-    print ()
     say(f"Greetings, {Player.name}.")
     if Player.weapon == "sword":
         say("You have a sword in your hand.")
