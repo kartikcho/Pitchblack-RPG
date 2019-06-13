@@ -10,6 +10,11 @@ import time
 import sys
 import re
 
+f = open('asciiart.txt', 'r')                                                      
+data = f.read()                      # reads asciiart.txt
+f.close()               
+print (data)    
+    
 #randomly generates player and enemy stats
 class Settings:
     PLAYER_ATTACK = random.randint(5, 10)
@@ -23,10 +28,8 @@ class Settings:
 
 #uses player input to create a character
 class Player:
-    f = open('asciiart2.txt', 'r') # open file in read mode
-    data = f.read()      # copy to a string
-    f.close()               # close the file
-    print (data)  
+    
+
     name = input('What is your name traveller? ')
     
     number = re.compile(r'[1,2,3]+')                                                        #characters allowed
