@@ -3,6 +3,12 @@ import time
 import sys
 import re
 
+#displays Cave Pitchblack ascii art
+f = open('asciiart.txt', 'r')                                                      
+data = f.read()                      # reads asciiart.txt
+f.close()               
+print (data)    
+    
 #randomly generates player and enemy stats
 class Settings:
     PLAYER_ATTACK = random.randint(5, 10)
@@ -24,3 +30,31 @@ class Enemy:
     weapon = random.choice(Settings.ENEMY_WEAPON)
     attack = random.randint(Settings.MIN_ENEMY_STRENGTH, Settings.MAX_ENEMY_STRENGTH)
     health = random.randint(10, 40) 
+
+#uses player input to create a character
+class Player:
+    
+
+    name = input('What is your name traveller? ')
+    
+    number = re.compile(r'[1,2,3]+')                                                        #characters allowed
+    weapon_choice = input('Choose your weapon: 1. Sword, 2.Battle Axe, 3. Recurve Bow ')    #while loop that executes till the entered character entered is valid
+    
+    while not number.match(weapon_choice):                                                  #compares the character entered
+        print ("Please enter a valid response")                                             #executes if character entered is invalid
+        weapon_choice = input('Choose your weapon: 1. Sword, 2. Battle Axe, 3. Recurve Bow ')
+    if weapon_choice == '1':
+        weapon_bonus = 2
+        weapon = "sword"
+    elif weapon_choice == "2":
+        weapon_bonus = 3
+        weapon = "axe"
+    elif weapon_choice == "3":
+        weapon_bonus = 2
+        weapon = "bow"
+    else:
+        print("You did not choose a weapon, restarting game...")
+
+    attack = Settings.PLAYER_ATTACK + weapon_bonus
+    health = 100
+    gold = 0
