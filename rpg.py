@@ -9,22 +9,13 @@ import random
 import time
 import sys
 import re
+import objects as obj
 
 f = open('asciiart.txt', 'r')                                                      
 data = f.read()                      # reads asciiart.txt
 f.close()               
 print (data)    
     
-#randomly generates player and enemy stats
-class Settings:
-    PLAYER_ATTACK = random.randint(5, 10)
-    MAX_ENEMY_STRENGTH = 15
-    MIN_ENEMY_STRENGTH = 5
-    ENEMIES = ['behemoth', 'goblin', 'hellstep', 'orc', 'golem', 'zombie', 'undead mermaid','brinebrute', 'soulcreep','murkmutant']
-    ENEMY_PREFIX = ['big', 'giant', 'ugly', 'fat', 'angry', 'vicious', 'murderous', 'vile', 'fat', 'dyslexic', 'terribly anorexic']
-    ENEMY_WEAPON = ['sword', 'warhammer', 'charming smile', 'axe', 'hammer', 'club', 'giant bone', 'mace', 'dagger', 'terrible case of body odor', 'shiny gauntlet from a dead city soldier']
-    PLAYER_WEAPON = {"sword": 2, "axe": 3, "bow": 2}
-    PLAYER_HEAL = 5
 
 #uses player input to create a character
 class Player:
@@ -50,21 +41,9 @@ class Player:
     else:
         print("You did not choose a weapon, restarting game...")
 
-    attack = Settings.PLAYER_ATTACK + weapon_bonus
+    attack = obj.Settings.PLAYER_ATTACK + weapon_bonus
     health = 100
     gold = 0
-
-#randomly generates enemy type
-class Enemy:
-    name = (
-        random.choice(Settings.ENEMY_PREFIX)
-        + " "
-        + random.choice(Settings.ENEMIES)
-    )
-    weapon = random.choice(Settings.ENEMY_WEAPON)
-    attack = random.randint(Settings.MIN_ENEMY_STRENGTH, Settings.MAX_ENEMY_STRENGTH)
-    health = random.randint(10, 40) 
-
 
 
 playAgain = "Y"                  #to run the first instance
@@ -93,8 +72,8 @@ def intro():
 
 #procedurally generates a battle instance
 def instance():
-    say(f"You have encountered a {Enemy.name} wielding a {Enemy.weapon}.")
-    say(f"Its attack is {Enemy.attack} and it has {Enemy.health} health.")
+    say(f"You have encountered a {obj.Enemy.name} wielding a {obj.Enemy.weapon}.")
+    say(f"Its attack is {obj.Enemy.attack} and it has {obj.Enemy.health} health.")
     say(
         f"Your attack would do {Player.attack} damage. You have {Player.health} health left."
     )
@@ -114,22 +93,22 @@ def instance():
         
 #simulates the fight
 def battle():
-    while Enemy.health > 0:
-        say(f"You attack the {Enemy.name} with your {Player.weapon}.")
-        Enemy.health = Enemy.health - Player.attack
-        if Enemy.health <= 0:
-            say(f"Your attack did {Player.attack} damage. The {Enemy.name} falls.")
+    while obj.Enemy.health > 0:
+        say(f"You attack the {obj.Enemy.name} with your {Player.weapon}.")
+        obj.Enemy.health = obj.Enemy.health - Player.attack
+        if obj.Enemy.health <= 0:
+            say(f"Your attack did {Player.attack} damage. The {obj.Enemy.name} falls.")
             victory()
 
         say(
-            f"Your attack did {Player.attack} damage. The {Enemy.name} now has {Enemy.health} health."
+            f"Your attack did {Player.attack} damage. The {obj.Enemy.name} now has {obj.Enemy.health} health."
         )
 
-        Player.health = Player.health - Enemy.attack
+        Player.health = Player.health - obj.Enemy.attack
         say(
-            f"The {Enemy.name} attacks back. You take {Enemy.attack} damage. Your health is now {Player.health}."
+            f"The {obj.Enemy.name} attacks back. You take {obj.Enemy.attack} damage. Your health is now {Player.health}."
         )
-        if Player.health > 0 and Enemy.health <= 0:
+        if Player.health > 0 and obj.Enemy.health <= 0:
             victory()
         if Player.health <= 0:
             sys.exit("You died. Game Over.")
@@ -139,24 +118,24 @@ def difficulty():
     instance.score = instance.score + 1
     Player.attack = Player.attack + random.randint(1, 3) * instance.score
     Player.health = Player.health + random.randint(1, 3) * instance.score
-    Enemy.name = (
-        random.choice(Settings.ENEMY_PREFIX)
+    obj.Enemy.name = (
+        random.choice(obj.Settings.ENEMY_PREFIX)
         + " "
-        + random.choice(Settings.ENEMIES)
+        + random.choice(obj.Settings.ENEMIES)
     )
-    Enemy.weapon = random.choice(Settings.ENEMY_WEAPON)
-    Enemy.attack = Enemy.attack + random.randint(1, 3) * instance.score
-    Enemy.health = random.randint(1, 20) + random.randint(1, 3) * instance.score
+    obj.Enemy.weapon = random.choice(obj.Settings.ENEMY_WEAPON)
+    obj.Enemy.attack = obj.Enemy.attack + random.randint(1, 3) * instance.score
+    obj.Enemy.health = random.randint(1, 20) + random.randint(1, 3) * instance.score
     Player.gold = Player.gold + random.randint(5,15) * instance.score
 
 #generates victory and the loot after battle
 def victory():
-    say(f"You defeated the {Enemy.name}.")
+    say(f"You defeated the {obj.Enemy.name}.")
     difficulty()
     say(f"You find some gold while looting and now have {Player.gold}")
     say(f"Your attack goes up to {Player.attack} and your health to {Player.health}")
-    if Settings.PLAYER_HEAL > 0:
-        say(f"You have {Settings.PLAYER_HEAL} meds left. Use them wisely.")
+    if obj.Settings.PLAYER_HEAL > 0:
+        say(f"You have {obj.Settings.PLAYER_HEAL} meds left. Use them wisely.")
         say("Would you like to use one? Y/N")
 
     value = re.compile(r'[y,Y,n,N]+')                                               #characters allowed
@@ -166,12 +145,12 @@ def victory():
         choice = input()
         if choice == 'Y' or choice == 'y':
             Player.health = Player.health + (random.randint(5, 10) * instance.score)
-            Settings.PLAYER_HEAL = Settings.PLAYER_HEAL - 1
-            say(f"Your health goes up to {Player.health}. You have {Settings.PLAYER_HEAL} meds left.")
+            obj.Settings.PLAYER_HEAL = obj.Settings.PLAYER_HEAL - 1
+            say(f"Your health goes up to {Player.health}. You have {obj.Settings.PLAYER_HEAL} meds left.")
         else:
-            say(f"You still have {Settings.PLAYER_HEAL} meds left.")
+            say(f"You still have {obj.Settings.PLAYER_HEAL} meds left.")
             
-    if Settings.PLAYER_HEAL == 0:
+    if obj.Settings.PLAYER_HEAL == 0:
         say("You are out of meds. Good luck.")
     store()    
     say("Go deeper into the cave? Y/N")
@@ -222,7 +201,7 @@ def store():
         instance()
         
     elif store.choice == '4':
-        Settings.PLAYER_HEAL = Settings.PLAYER_HEAL + 1
+        obj.Settings.PLAYER_HEAL = obj.Settings.PLAYER_HEAL + 1
         instance()
              
         
