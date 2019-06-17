@@ -29,7 +29,7 @@ def intro():
         say("You have an axe by your side. Slow, but strong.")
     elif obj.Player.weapon == "bow":
         say("You picked the bow. Silent but deadly.")
-    say("You were sent to clear out the Pitchblack cave by the kingdom.")
+    say("You were sent to clear out Cave Pitchblack by the kingdom.")
     say("You reach your destination, the cave dark as the night as you enter.")
 
 #procedurally generates a battle instance
@@ -114,7 +114,6 @@ def victory():
             
     if obj.Settings.PLAYER_HEAL == 0:
         say("You are out of meds. Good luck.")
-    store()    
     say("Go deeper into the cave? Y/N")
     value = re.compile(r'[y,Y,n,N]+')
     choice = input()
@@ -139,6 +138,7 @@ def end():
 #merchant uses Player.gold
 def store():
     say(f"You see a strange merchant waiting in the shadows with blue flames in his lamp")
+    say(f"\nYou approach him.\n")
     say(f"\n'What are you buying stranger?'\n")
     say(f"You have {obj.Player.gold} coins left.")
     print ("1. Flame Sword       [5 DMG]     --> 100 gold coins")
