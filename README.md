@@ -9,11 +9,15 @@ Also involves multiple stats for the player like HP, AP and itembonuses.
 
 * Python3 
 
-## Contributing
+## To run program:
+Run rpg.py to start the game.
 
-* Check the issues tab to work on fixes
-* For content updates, work on a seperate branch
-* If you find a bug while reviewing the code, please report the issue with suitable labels.
-* Read the roadmap [here](ROADMAP.md) to work on or know about future planned updates.
+```bash
+cd [[location of the file "rpg.py"]]
+python rpg.py
+```
 
-### Create pull requests so I can review and add to master.
+### To see how you can contribute, see [here](CONTRIBUTING.md).
+
+### To know about future planned updates, see [here](ROADMAP.md).
+
