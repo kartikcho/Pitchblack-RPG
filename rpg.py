@@ -18,5 +18,6 @@ while playAgain == 'Y' or playAgain == 'y':
     func.instance.score = 0
     obj.Player.gold = 0
     func.instance()
+    func.store()
     func.end()
     break

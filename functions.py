@@ -105,10 +105,10 @@ def victory():
     while not value.match(choice):                                                  #while loop that executes till the entered character entered is valid
         print ("Please enter a valid response")
         choice = input()
-        if choice == 'Y' or choice == 'y':
+        if choice == 'Y' or choice == 'y':                                          #does not work
             obj.Player.health = obj.Player.health + (random.randint(5, 10) * instance.score)
             obj.Settings.PLAYER_HEAL = obj.Settings.PLAYER_HEAL - 1
-            say(f"Your health goes up to {obj.Player.health}. You have {obj.Settings.PLAYER_HEAL} meds left.")
+            say(f"Your health goes up to {obj.Player.health}. You have {obj.Settings.PLAYER_HEAL} meds left.")  
         else:
             say(f"You still have {obj.Settings.PLAYER_HEAL} meds left.")
             
@@ -124,6 +124,7 @@ def victory():
     
     if choice == 'Y' or  choice == 'y':
         say('You march forward...')
+        store()
         instance()
     if choice == "N" or choice == "n":
         end()
@@ -152,17 +153,41 @@ def store():
     
     if store.choice == '1':
         obj.Player.weapon_bonus = 6
-        instance()
+        obj.Player.gold = obj.Player.gold-100
+        if obj.Player.gold < 0:
+            say("Not enough gold")
+            instance()
+        else:
+            say("Bought successfully")
+            instance()
         
     elif store.choice == '2':
         obj.Player.weapon_bonus = 4
-        instance()
+        obj.Player.gold = obj.Player.gold-40
+        if obj.Player.gold < 0:
+            say("Not enough gold")
+            instance()
+        else:
+            say("Bought successfully")
+            instance()
         
     elif store.choice == '3':
         obj.Player.weapon_bonus = 5
-        instance()
+        obj.Player.gold = obj.Player.gold-70
+        if obj.Player.gold < 0:
+            say("Not enough gold")
+            instance()
+        else:
+            say("Bought successfully")
+            instance()
         
     elif store.choice == '4':
         obj.Settings.PLAYER_HEAL = obj.Settings.PLAYER_HEAL + 1
-        instance()
+        obj.Player.gold = obj.Player.gold-20
+        if obj.Player.gold < 0:
+            say("Not enough gold")
+            instance()
+        else:
+            say("Bought successfully")
+            instance()
              
