@@ -78,7 +78,7 @@ def battle():
 #generates new enemy strength and stats to increase difficulty and levels up character after fight
 def difficulty():
     instance.score = instance.score + 1
-    obj.Player.attack = obj.Player.attack + random.randint(1, 3) * instance.score
+    obj.Player.attack = obj.Player.weapon_bonus + obj.Player.attack + random.randint(1, 3) * instance.score
     obj.Player.health = obj.Player.health + random.randint(1, 3) * instance.score
     obj.Enemy.name = (
         random.choice(obj.Settings.ENEMY_PREFIX)

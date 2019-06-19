@@ -59,3 +59,4 @@ class Player:
     attack = Settings.PLAYER_ATTACK + weapon_bonus
     health = 100
     gold = 0
+    weapon_bonus = 0
