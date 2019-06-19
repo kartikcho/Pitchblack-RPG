@@ -149,7 +149,13 @@ def store():
     print ("5. back")
     print (" ")
     
-    store.choice = input()
+    merch_number = re.compile(r'[1,2,3,4,5]+')                                                  #characters allowed
+    store.choice = input()                                                                #while loop that executes till the entered character entered is valid
+    
+    
+    while not merch_number.match(store.choice):                                                 #compares the character entered
+        print ("Please enter a valid response")
+        store.choice = input()
     
     if store.choice == '1':
         obj.Player.weapon_bonus = 6
