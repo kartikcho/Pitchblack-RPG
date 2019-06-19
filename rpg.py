@@ -5,6 +5,7 @@ Created on Thu Jun 6 11:42:48 2019
 @author: Kartik
 """
 
+
 from consolemenu import *
 from consolemenu.items import *
 
@@ -17,7 +18,7 @@ menu = ConsoleMenu("CAVE PITCHBLACK", "A DnD style roll based RPG")
 menu_item = MenuItem("Menu Item")
 
 # A FunctionItem runs a Python function when selected
-function_item = FunctionItem("Call a Python function", input, ["Enter an input"])
+function_item = FunctionItem("Call a Python function", func.intro(), ["Starting Game..."])
 
 # A CommandItem runs a console command
 command_item = CommandItem("Run a console command",  "touch hello.txt")
@@ -39,8 +40,8 @@ menu.append_item(submenu_item)
 menu.show()
 
 #importing libraries
-import objects as obj
 import functions as func
+import objects as obj
 
 playAgain = "Y"                  #to run the first instance
 
