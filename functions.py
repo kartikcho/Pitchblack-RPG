@@ -125,7 +125,7 @@ def victory():
     if choice == 'Y' or  choice == 'y':
         say('You march forward...')
         num = random.randint(1, 10)
-        if num < 4:
+        if num < 5:
             store()
             instance()
         else:
