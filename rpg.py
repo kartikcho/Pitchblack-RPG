@@ -8,6 +8,7 @@ Created on Thu Jun 6 11:42:48 2019
 from consolemenu import *
 from consolemenu.items import *
 
+import functions as func
 # Creating the menu
 menu = ConsoleMenu("CAVE PITCHBLACK", "A DnD style roll based RPG")
 
@@ -18,15 +19,13 @@ start_game = FunctionItem("Start Game", func.intro(), ["Starting Game..."])
 leaderboard = MenuItem("View Leaderboards")
 
 # Adding the items to the menu
-menu.append_item(function_item)
-menu.append_item(command_item)
-menu.append_item(submenu_item)
+menu.append_item(start_game)
+menu.append_item(leaderboard)
 
 # Show the menu and allow the user to interact
 menu.show()
 
 #importing libraries
-import functions as func
 import objects as obj
 
 playAgain = "Y"                  #to run the first instance
