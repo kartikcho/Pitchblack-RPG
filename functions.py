@@ -11,6 +11,7 @@ import sys
 import re
 import objects as obj
 
+
 #text output speed
 def say(text):
     for char in text:
