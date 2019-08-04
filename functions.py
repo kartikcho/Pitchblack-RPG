@@ -94,7 +94,7 @@ def difficulty():
 def victory():
     say(f"You defeated the {obj.Enemy.name}.")
     difficulty()
-    say(f"You find some gold while looting and now have {obj.Player.gold}")
+    say(f"You find some gold while looting and now have {obj.Player.gold} coins.")
     say(f"Your attack goes up to {obj.Player.attack} and your health to {obj.Player.health}")
     if obj.Settings.PLAYER_HEAL > 0:
         say(f"You have {obj.Settings.PLAYER_HEAL} meds left. Use them wisely.")
@@ -137,7 +137,8 @@ def victory():
 def end():
     say("You decide to be smart and retreat...")
     say(f"You defeated {instance.score} monsters.")
-    say(f"Thank you for playing.")
+    say(f"Thank you for playing.")      
+    say(f"Made by Kartik Choudhary")                    #Star me on Github lol (kartikch918)
     sys.exit("Exiting game ...")
 
 #merchant uses Player.gold
