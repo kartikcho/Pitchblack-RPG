@@ -143,7 +143,7 @@ def end():
 
 #merchant uses Player.gold
 def store():
-    say(f"You see a strange merchant waiting in the shadows with blue flames in his lamp")
+    say(f"You see a strange merchant waiting in the shadows with blue flames in his lamp.")
     say(f"\nYou approach him.\n")
     say(f"\n'What are you buying stranger?'\n")
     say(f"You have {obj.Player.gold} coins left.")
