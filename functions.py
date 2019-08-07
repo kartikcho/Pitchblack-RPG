@@ -24,7 +24,7 @@ def say(text):
 def intro():
     say(f"Greetings, {obj.Player.name}.")
     if obj.Player.weapon == "sword":
-        say("You have a sword in your hand.")
+        say("You have a sword in your hand. Fast and swift.")
     elif obj.Player.weapon == "axe":
         say("You have an axe by your side. Slow, but strong.")
     elif obj.Player.weapon == "bow":
@@ -100,18 +100,18 @@ def victory():
         say(f"You have {obj.Settings.PLAYER_HEAL} meds left. Use them wisely.")
         say("Would you like to use one? Y/N")
 
-    value = re.compile(r'[y,Y,n,N]+')                                               #characters allowed
-    choice = input()                                                                                       
-    while not value.match(choice):                                                  #while loop that executes till the entered character entered is valid
-        print ("Please enter a valid response")
-        choice = input()
-        if choice == 'Y' or choice == 'y':                                          #does not work
-            obj.Player.health = obj.Player.health + (random.randint(5, 10) * instance.score)
-            obj.Settings.PLAYER_HEAL = obj.Settings.PLAYER_HEAL - 1
-            say(f"Your health goes up to {obj.Player.health}. You have {obj.Settings.PLAYER_HEAL} meds left.")  
-        else:
-            say(f"You still have {obj.Settings.PLAYER_HEAL} meds left.")
-            
+        value = re.compile(r'[y,Y,n,N]+')                                               #characters allowed
+        choice = input()                                                                                       
+        while not value.match(choice):                                                  #while loop that executes till the entered character entered is valid
+            print ("Please enter a valid response")
+            choice = input()
+            if choice == 'Y' or choice == 'y':                                          #does not work
+                obj.Player.health = obj.Player.health + (random.randint(5, 10) * instance.score)
+                obj.Settings.PLAYER_HEAL = obj.Settings.PLAYER_HEAL - 1
+                say(f"Your health goes up to {obj.Player.health}. You have {obj.Settings.PLAYER_HEAL} meds left.")  
+            else:
+                say(f"You still have {obj.Settings.PLAYER_HEAL} meds left.")
+                
     if obj.Settings.PLAYER_HEAL == 0:
         say("You are out of meds. Good luck.")
     say("Go deeper into the cave? Y/N")
