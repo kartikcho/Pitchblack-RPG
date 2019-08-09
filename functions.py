@@ -56,7 +56,7 @@ def instance():
 #simulates the fight
 def battle():
     while obj.Enemy.health > 0:
-        say(f"You attack the {obj.Enemy.name} with your {obj.Player.weapon}.")
+        say(f"You attack with your {obj.Player.weapon}.")
         obj.Enemy.health = obj.Enemy.health - obj.Player.attack
         if obj.Enemy.health <= 0:
             say(f"Your attack did {obj.Player.attack} damage. The {obj.Enemy.name} falls.")
@@ -169,7 +169,7 @@ def store():
             say("Not enough gold")
             instance()
         else:
-            say("Bought successfully")
+            say("Purchased successfully")
             instance()
         
     elif store.choice == '2':
@@ -179,7 +179,7 @@ def store():
             say("Not enough gold")
             instance()
         else:
-            say("Bought successfully")
+            say("Purchased successfully")
             instance()
         
     elif store.choice == '3':
@@ -189,7 +189,7 @@ def store():
             say("Not enough gold")
             instance()
         else:
-            say("Bought successfully")
+            say("Purchased successfully")
             instance()
         
     elif store.choice == '4':
@@ -199,6 +199,6 @@ def store():
             say("Not enough gold")
             instance()
         else:
-            say("Bought successfully")
+            say("Purchased successfully")
             instance()
              
