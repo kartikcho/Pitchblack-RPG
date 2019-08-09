@@ -1,6 +1,4 @@
 import random
-import time
-import sys
 import re
 import functions as func
 
