@@ -170,6 +170,7 @@ def store():
             instance()
         else:
             say("Purchased successfully")
+            say("He grins as you leave and go forward.")
             instance()
         
     elif store.choice == '2':
@@ -180,6 +181,7 @@ def store():
             instance()
         else:
             say("Purchased successfully")
+            say("He grins as you leave and go forward.")
             instance()
         
     elif store.choice == '3':
@@ -190,6 +192,7 @@ def store():
             instance()
         else:
             say("Purchased successfully")
+            say("He grins as you leave and go forward.")
             instance()
         
     elif store.choice == '4':
@@ -200,5 +203,6 @@ def store():
             instance()
         else:
             say("Purchased successfully")
+            say("He grins as you leave and go forward.")
             instance()
              
