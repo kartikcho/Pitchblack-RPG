@@ -108,7 +108,7 @@ def victory():
         if choice == 'Y' or choice == 'y':                                          #does not work
             obj.Player.health = obj.Player.health + (random.randint(5, 10) * instance.score)
             obj.Settings.PLAYER_HEAL = obj.Settings.PLAYER_HEAL - 1
-            say(f"Your health goes up to {obj.Player.health}. You have {obj.Settings.PLAYER_HEAL} meds left.")  
+            say(f"You mend your wounds and your health goes up to {obj.Player.health}. You have {obj.Settings.PLAYER_HEAL} meds left.")  
         else:
             say(f"You still have {obj.Settings.PLAYER_HEAL} meds left.")
             
