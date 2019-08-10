@@ -9,7 +9,6 @@ import os as os
 
 os.system('cls')                 #clears screen before displaying ASCII art
 
-
 import objects as obj
 import functions as func
 
