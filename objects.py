@@ -1,6 +1,5 @@
+#importing libraries
 import random
-import time
-import sys
 import re
 import functions as func
 
@@ -39,7 +38,7 @@ class Player:
     name = input('What is your name traveller? ')
     
     number = re.compile(r'[1,2,3]+')                                                        #characters allowed
-    weapon_choice = input('Choose your weapon: 1. Sword, 2.Battle Axe, 3. Recurve Bow ')    #while loop that executes till the entered character entered is valid
+    weapon_choice = input('Choose your weapon: 1. Sword, 2.Battle Axe, 3. Recurve Bow ')    #while loop that executes till the character entered is valid
     
     while not number.match(weapon_choice):                                                  #compares the character entered
         print ("Please enter a valid response")                                             #executes if character entered is invalid

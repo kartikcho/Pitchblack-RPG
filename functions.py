@@ -24,7 +24,7 @@ def say(text):
 def intro():
     say(f"Greetings, {obj.Player.name}.")
     if obj.Player.weapon == "sword":
-        say("You have a sword in your hand.")
+        say("You have a sword in your hand. Fast and swift.")
     elif obj.Player.weapon == "axe":
         say("You have an axe by your side. Slow, but strong.")
     elif obj.Player.weapon == "bow":
@@ -56,7 +56,7 @@ def instance():
 #simulates the fight
 def battle():
     while obj.Enemy.health > 0:
-        say(f"You attack the {obj.Enemy.name} with your {obj.Player.weapon}.")
+        say(f"You attack with your {obj.Player.weapon}.")
         obj.Enemy.health = obj.Enemy.health - obj.Player.attack
         if obj.Enemy.health <= 0:
             say(f"Your attack did {obj.Player.attack} damage. The {obj.Enemy.name} falls.")
@@ -100,15 +100,15 @@ def victory():
         say(f"You have {obj.Settings.PLAYER_HEAL} meds left. Use them wisely.")
         say("Would you like to use one? Y/N")
 
-    value = re.compile(r'[y,Y,n,N]+')                                               #characters allowed
-    choice = input()                                                                                       
-    while not value.match(choice):                                                  #while loop that executes till the entered character entered is valid
-        print ("Please enter a valid response")
-        choice = input()
-        if choice == 'Y' or choice == 'y':                                          #does not work
+        value = re.compile(r'[y,Y,n,N]+')                                               #characters allowed
+        choice = input()                                                                                       
+        while not value.match(choice):                                                  #while loop that executes till the entered character entered is valid
+            print ("Please enter a valid response")
+            choice = input()
+        if choice == 'Y' or choice == 'y':                                          
             obj.Player.health = obj.Player.health + (random.randint(5, 10) * instance.score)
             obj.Settings.PLAYER_HEAL = obj.Settings.PLAYER_HEAL - 1
-            say(f"Your health goes up to {obj.Player.health}. You have {obj.Settings.PLAYER_HEAL} meds left.")  
+            say(f"You mend your wounds and your health goes up to {obj.Player.health}. You have {obj.Settings.PLAYER_HEAL} meds left.")  
         else:
             say(f"You still have {obj.Settings.PLAYER_HEAL} meds left.")
             
@@ -143,7 +143,7 @@ def end():
 
 #merchant uses Player.gold
 def store():
-    say(f"You see a strange merchant waiting in the shadows with blue flames in his lamp")
+    say(f"You see a strange merchant waiting in the shadows with blue flames in his lamp.")
     say(f"\nYou approach him.\n")
     say(f"\n'What are you buying stranger?'\n")
     say(f"You have {obj.Player.gold} coins left.")
@@ -154,51 +154,58 @@ def store():
     print ("5. back")
     print (" ")
     
-    merch_number = re.compile(r'[1,2,3,4,5]+')                                                  #characters allowed
+    merch_number = re.compile(r'[1,2,3,4,5]+')                                            #characters allowed
     store.choice = input()                                                                #while loop that executes till the entered character entered is valid
     
     
-    while not merch_number.match(store.choice):                                                 #compares the character entered
+    while not merch_number.match(store.choice):                                           #compares the character entered
         print ("Please enter a valid response")
         store.choice = input()
     
     if store.choice == '1':
-        obj.Player.weapon_bonus = 6
-        obj.Player.gold = obj.Player.gold-100
         if obj.Player.gold < 0:
             say("Not enough gold")
             instance()
         else:
-            say("Bought successfully")
+            obj.Player.weapon_bonus = 6
+            obj.Player.gold = obj.Player.gold-100
+            say("Purchased successfully")
+            say("The merchant grins as you leave and go forward.")
             instance()
         
     elif store.choice == '2':
-        obj.Player.weapon_bonus = 4
-        obj.Player.gold = obj.Player.gold-40
         if obj.Player.gold < 0:
             say("Not enough gold")
             instance()
         else:
-            say("Bought successfully")
+            obj.Player.weapon_bonus = 4
+            obj.Player.gold = obj.Player.gold-40
+            say("Purchased successfully")
+            say("The merchant grins as you leave and go forward.")
             instance()
         
     elif store.choice == '3':
-        obj.Player.weapon_bonus = 5
-        obj.Player.gold = obj.Player.gold-70
         if obj.Player.gold < 0:
             say("Not enough gold")
             instance()
         else:
-            say("Bought successfully")
+            obj.Player.weapon_bonus = 5
+            obj.Player.gold = obj.Player.gold-70
+            say("Purchased successfully")
+            say("The merchant grins as you leave and go forward.")
             instance()
         
     elif store.choice == '4':
-        obj.Settings.PLAYER_HEAL = obj.Settings.PLAYER_HEAL + 1
-        obj.Player.gold = obj.Player.gold-20
         if obj.Player.gold < 0:
             say("Not enough gold")
             instance()
         else:
-            say("Bought successfully")
+            obj.Settings.PLAYER_HEAL = obj.Settings.PLAYER_HEAL + 1
+            obj.Player.gold = obj.Player.gold-20
+            say("Purchased successfully")
+            say("The merchant grins as you leave and go forward.")
             instance()
+    elif store.choice == '5':
+        say("\"You will come again stranger\", he exclaims")
+        instance()     
              
