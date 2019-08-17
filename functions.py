@@ -146,7 +146,7 @@ def store():
     say(f"You see a strange merchant waiting in the shadows with blue flames in his lamp.")
     say(f"\nYou approach him.\n")
     say(f"\n'What are you buying stranger?'\n")
-    say(f"You have {obj.Player.gold} coins left.")
+    say(f"You check your pockets and see you have {obj.Player.gold} coins left.")
     print ("1. Flame Sword       [5 DMG]     --> 100 gold coins")
     print ("2. Enchanted Dagger  [5 DMG]     --> 40 gold coins")
     print ("3. Stealth Bow       [5 DMG]     --> 70 gold coins")
